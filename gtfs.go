@@ -67,11 +67,9 @@ func LoadSplitted(dirPath string, filter map[string]bool) ([]*GTFS, error) {
 // @param g: the GTFS struct that will receive the data
 // @return an error
 func loadGTFS(g *GTFS, filter map[string]bool) error {
-	// Create a slice of agency to load agency.txt
-	var agencySlice []Agency
 	// List all files that will be loaded and there dest
 	filesToLoad := map[string]interface{}{
-		"agency.txt":         &agencySlice,
+		"agency.txt":         &g.Agencies,
 		"calendar.txt":       &g.Calendars,
 		"calendar_dates.txt": &g.CalendarDates,
 		"routes.txt":         &g.Routes,
@@ -100,10 +98,6 @@ func loadGTFS(g *GTFS, filter map[string]bool) error {
 			return fmt.Errorf("Error loading file (%v)\n	==> %v", file, err)
 		}
 	}
-	// Put the loaded agency in g.Agency
-	if len(agencySlice) > 0 {
-		g.Agency = agencySlice[0]
-	}
 	return nil
 }
 
@@ -115,7 +109,7 @@ func loadGTFS(g *GTFS, filter map[string]bool) error {
 func Dump(g *GTFS, dirPath string, filter map[string]bool) error {
 	_, err := os.Stat(dirPath)
 	if os.IsNotExist(err) {
-		err = os.MkdirAll(dirPath, os.ModeDir | 0755)
+		err = os.MkdirAll(dirPath, os.ModeDir|0755)
 		if err != nil {
 			return err
 		}
@@ -124,14 +118,14 @@ func Dump(g *GTFS, dirPath string, filter map[string]bool) error {
 	}
 
 	files := map[string]interface{}{
-		"agency.txt":			[]Agency{g.Agency},
-		"calendar.txt":			g.Calendars,
-		"calendar_dates.txt": 	g.CalendarDates,
-		"routes.txt":			g.Routes,
-		"stops.txt":			g.Stops,
-		"stop_times.txt":		g.StopsTimes,
-		"transfers.txt":		g.Transfers,
-		"trips.txt":			g.Trips,
+		"agency.txt":         g.Agencies,
+		"calendar.txt":       g.Calendars,
+		"calendar_dates.txt": g.CalendarDates,
+		"routes.txt":         g.Routes,
+		"stops.txt":          g.Stops,
+		"stop_times.txt":     g.StopsTimes,
+		"transfers.txt":      g.Transfers,
+		"trips.txt":          g.Trips,
 	}
 	for file, src := range files {
 		if filter != nil && !filter[file[:len(file)-4]] {
