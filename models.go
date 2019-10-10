@@ -45,8 +45,8 @@ type Stop struct {
 	Description string  `csv:"stop_desc"`
 	Latitude    float64 `csv:"stop_lat"`
 	Longitude   float64 `csv:"stop_lon"`
-	ZoneID      float64 `csv:"zone_id"`
-	Timezone    float64 `csv:"stop_timezone"`
+	ZoneID      string  `csv:"zone_id"`
+	Timezone    string  `csv:"stop_timezone"`
 	Type        string  `csv:"location_type"`
 	Parent      string  `csv:"parent_station"`
 }
