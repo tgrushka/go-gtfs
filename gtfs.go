@@ -5,6 +5,8 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+
+	"github.com/artonge/go-csv-tag"
 )
 
 // Load - load GTFS files
