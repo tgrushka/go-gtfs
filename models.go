@@ -29,13 +29,15 @@ type Route struct {
 
 // Trip -
 type Trip struct {
-	ID          string `csv:"trip_id"`
-	Name        string `csv:"trip_short_name"`
-	RouteID     string `csv:"route_id"`
-	ServiceID   string `csv:"service_id"`
-	ShapeID     string `csv:"shape_id"`
-	DirectionID string `csv:"direction_id"`
-	Headsign    string `csv:"trip_headsign"`
+	ID                   string `csv:"trip_id"`
+	Name                 string `csv:"trip_short_name"`
+	RouteID              string `csv:"route_id"`
+	ServiceID            string `csv:"service_id"`
+	ShapeID              string `csv:"shape_id"`
+	DirectionID          string `csv:"direction_id"`
+	Headsign             string `csv:"trip_headsign"`
+	BlockID              string `csv:"block_id"`
+	WheelchairAccessible int    `csv:"wheelchair_accessible"`
 }
 
 // Stop -
