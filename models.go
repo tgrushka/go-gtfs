@@ -11,6 +11,7 @@ type GTFS struct {
 	Calendars     []Calendar
 	CalendarDates []CalendarDate
 	Transfers     []Transfer
+	Shapes        []Shape
 }
 
 // Route -
@@ -99,4 +100,13 @@ type Agency struct {
 	Timezone string `csv:"agency_timezone"`
 	Langue   string `csv:"agency_lang"`
 	Phone    string `csv:"agency_phone"`
+}
+
+// Shape -
+type Shape struct {
+	ID               string  `csv:"shape_id"`
+	Sequence         string  `csv:"shape_pt_sequence"`
+	Latitude         float64 `csv:"shape_pt_lat"`
+	Longitude        float64 `csv:"shape_pt_lon"`
+	DistanceTraveled float64 `csv:"shape_dist_traveled"`
 }

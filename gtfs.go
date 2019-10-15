@@ -5,8 +5,6 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
-
-	"github.com/artonge/go-csv-tag"
 )
 
 // Load - load GTFS files
@@ -77,6 +75,7 @@ func loadGTFS(g *GTFS, filter map[string]bool) error {
 		"stop_times.txt":     &g.StopsTimes,
 		"transfers.txt":      &g.Transfers,
 		"trips.txt":          &g.Trips,
+		"shapes.txt":         &g.Shapes,
 	}
 	// Load the files
 	for file, dest := range filesToLoad {
@@ -126,6 +125,7 @@ func Dump(g *GTFS, dirPath string, filter map[string]bool) error {
 		"stop_times.txt":     g.StopsTimes,
 		"transfers.txt":      g.Transfers,
 		"trips.txt":          g.Trips,
+		"shapes.txt":         g.Shapes,
 	}
 	for file, src := range files {
 		if filter != nil && !filter[file[:len(file)-4]] {

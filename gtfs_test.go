@@ -6,6 +6,7 @@ import (
 	"testing"
 )
 
+// TODO: Include Shapes in tests
 func TestLoad(t *testing.T) {
 	gtfs, err := Load(path.Join("gtfs_test", "ratp"), nil)
 	if err != nil {
