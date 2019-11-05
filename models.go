@@ -109,7 +109,7 @@ type Agency struct {
 // Shape -
 type Shape struct {
 	ID               string  `csv:"shape_id"`
-	Sequence         string  `csv:"shape_pt_sequence"`
+	Sequence         int     `csv:"shape_pt_sequence"`
 	Latitude         float64 `csv:"shape_pt_lat"`
 	Longitude        float64 `csv:"shape_pt_lon"`
 	DistanceTraveled float64 `csv:"shape_dist_traveled"`
