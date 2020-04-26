@@ -3,7 +3,7 @@ package gtfs
 // GTFS -
 type GTFS struct {
 	Path          string // The path to the containing directory
-	Agency        Agency
+	Agencies      []Agency
 	Routes        []Route
 	Stops         []Stop
 	StopsTimes    []StopTime
@@ -11,6 +11,7 @@ type GTFS struct {
 	Calendars     []Calendar
 	CalendarDates []CalendarDate
 	Transfers     []Transfer
+	Shapes        []Shape
 }
 
 // Route -
@@ -28,13 +29,15 @@ type Route struct {
 
 // Trip -
 type Trip struct {
-	ID          string `csv:"trip_id"`
-	Name        string `csv:"trip_short_name"`
-	RouteID     string `csv:"route_id"`
-	ServiceID   string `csv:"service_id"`
-	ShapeID     string `csv:"shape_id"`
-	DirectionID string `csv:"direction_id"`
-	Headsign    string `csv:"trip_headsign"`
+	ID                   string `csv:"trip_id"`
+	Name                 string `csv:"trip_short_name"`
+	RouteID              string `csv:"route_id"`
+	ServiceID            string `csv:"service_id"`
+	ShapeID              string `csv:"shape_id"`
+	DirectionID          string `csv:"direction_id"`
+	Headsign             string `csv:"trip_headsign"`
+	BlockID              string `csv:"block_id"`
+	WheelchairAccessible int    `csv:"wheelchair_accessible"`
 }
 
 // Stop -
@@ -45,6 +48,8 @@ type Stop struct {
 	Description string  `csv:"stop_desc"`
 	Latitude    float64 `csv:"stop_lat"`
 	Longitude   float64 `csv:"stop_lon"`
+	ZoneID      string  `csv:"zone_id"`
+	Timezone    string  `csv:"stop_timezone"`
 	Type        string  `csv:"location_type"`
 	Parent      string  `csv:"parent_station"`
 }
@@ -52,12 +57,14 @@ type Stop struct {
 // StopTime -
 type StopTime struct {
 	StopID       string  `csv:"stop_id"`
-	StopSeq      string  `csv:"stop_sequence"`
+	StopSeq      int     `csv:"stop_sequence"`
 	StopHeadSign string  `csv:"stop_headsign"`
 	TripID       string  `csv:"trip_id"`
 	Shape        float64 `csv:"shape_dist_traveled"`
 	Departure    string  `csv:"departure_time"`
 	Arrival      string  `csv:"arrival_time"`
+	PickupType   int     `csv:"pickup_type"`
+	DropOffType  int     `csv:"drop_off_type"`
 }
 
 // Calendar -
@@ -97,4 +104,13 @@ type Agency struct {
 	Timezone string `csv:"agency_timezone"`
 	Langue   string `csv:"agency_lang"`
 	Phone    string `csv:"agency_phone"`
+}
+
+// Shape -
+type Shape struct {
+	ID               string  `csv:"shape_id"`
+	Sequence         int     `csv:"shape_pt_sequence"`
+	Latitude         float64 `csv:"shape_pt_lat"`
+	Longitude        float64 `csv:"shape_pt_lon"`
+	DistanceTraveled float64 `csv:"shape_dist_traveled"`
 }
